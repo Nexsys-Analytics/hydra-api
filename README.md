@@ -6,3 +6,5 @@ cli, through docker and kubernetes and terraform.
 This is not located in the primary hydra-server repository as it is bespoke
 to our hwi deplouyment strategy, and so we do not want it to intrude on the more
 general hydra-server library.
+
+This repo is specifically created to integrate with the cli, and will be structured as such.
