@@ -1,0 +1,72 @@
+{
+  "service":{
+    "name": "hydra-server",
+    "description": "This service represents the Hydra Server API",
+    "warning": "The order of the resources is important because the creation is done forward while deletion is done backward!",
+    "resources":[
+      {
+        "properties":{
+          "name":"hsv-aws-config-map",
+          "temp_folder":"aws-config-map",
+          "remote_service": "s3",
+          "remote_sub_folder":"/.aws",
+          "type": "configmap",
+          "subtype": "from-file",
+          "enabled": "true"
+        },
+        "files":[
+          "config",
+          "credentials"
+        ],
+        "mandatory_env_variables":[
+          "K8S_AWS_USER_ARN",
+          "K8S_AWS_ACCESS_KEY_ID",
+          "K8S_AWS_SECRET_ACCESS_KEY"
+        ]
+      }, {
+        "properties":{
+          "name":"hsv-config-map",
+          "temp_folder":"config-map",
+          "remote_service": "s3",
+          "remote_sub_folder":"/.hydra",
+          "type": "configmap",
+          "subtype": "from-file",
+          "enabled": "true"
+        },
+        "files":[
+          "config.py",
+          "hydra.ini"
+        ]
+      }, {
+        "properties":{
+          "name":"hydra-server-deployment",
+          "folder":"deployment",
+          "type": "deployment",
+          "subtype": "n/a",
+          "enabled": "true"
+        },
+        "files_execution_order": [
+          "hsv-deployment"
+        ],
+        "containers": {
+          "hsv": {
+            "image_name": "hydra-server"
+          }
+        }
+      }, {
+        "properties":{
+          "name":"hydra-server-nodeport",
+          "folder":"nodeport",
+          "type": "load-balancer",
+          "subtype": "n/a",
+          "certificate_enabled": "false",
+          "dns_enabled": "false",
+          "enabled": "true"
+        },
+        "files_execution_order": [
+          "hsv-service"
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,52 @@
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: hsv-${HWI_ENV_K8S_CURRENT_DISTRIBUTION}-statefulset
+  labels:
+    app: hsv-${HWI_ENV_K8S_CURRENT_DISTRIBUTION}
+spec:
+  replicas: 2
+  serviceName: hydra-server-docker
+  updateStrategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: hsv-${HWI_ENV_K8S_CURRENT_DISTRIBUTION}
+  template:
+    metadata:
+      labels:
+        app: hsv-${HWI_ENV_K8S_CURRENT_DISTRIBUTION}
+    spec:
+      terminationGracePeriodSeconds: 30
+      containers:
+      - name: hsv-${HWI_ENV_K8S_CURRENT_DISTRIBUTION}
+        image: "${K8S_DIST_IMAGE_SOURCE_hsv}:${K8S_DIST_IMAGE_TAG_hsv}"
+        imagePullPolicy: "${K8S_IMAGE_PULL_POLICY}"
+        resources:
+          limits:
+            memory: "256Mi"
+          requests:
+            memory: "256Mi"
+        env:
+        - name: IS_RUNNING_ENVIRONMENT_K8S
+          value: 'TRUE'
+        - name: K8S_IMAGE_SIMPLE_NAME_SOURCE_hsv
+          value: "${K8S_IMAGE_SIMPLE_NAME_SOURCE_hsv}"
+        volumeMounts:
+        - name: hydra-${HWI_ENV_K8S_CURRENT_DISTRIBUTION}-config-volume
+          mountPath: "/root/.hydra"
+        - name: hydra-${HWI_ENV_K8S_CURRENT_DISTRIBUTION}-aws-config-volume
+          mountPath: "/root/.aws"
+        - name: dockersock
+          mountPath: "/var/run/docker.sock"
+      volumes:
+      - name: hydra-${HWI_ENV_K8S_CURRENT_DISTRIBUTION}-config-volume
+        configMap:
+          name: hydra-${HWI_ENV_K8S_CURRENT_DISTRIBUTION}-hsv-config-map
+      - name: hydra-${HWI_ENV_K8S_CURRENT_DISTRIBUTION}-aws-config-volume
+        configMap:
+          name: hydra-${HWI_ENV_K8S_CURRENT_DISTRIBUTION}-hsv-aws-config-map
+      - name: dockersock
+        hostPath:
+          path: "/var/run/docker.sock"

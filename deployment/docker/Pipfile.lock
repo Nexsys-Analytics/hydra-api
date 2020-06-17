@@ -1,0 +1,33 @@
+{
+    "_meta": {
+        "hash": {
+            "sha256": "a813d4958a7aa9aa60c28250b9c0c81d9d9ae439167b891be06889b19b63ebaa"
+        },
+        "pipfile-spec": 6,
+        "requires": {
+            "python_version": "3.6"
+        },
+        "sources": [
+            {
+                "name": "pypi",
+                "url": "https://pypi.org/simple",
+                "verify_ssl": true
+            }
+        ]
+    },
+    "default": {
+        "hydra-base": {
+            "git": "https://github.com/hydraplatform/hydra-base.git",
+            "ref": "3390497741444e293daa23bd14e88492d4f8a453"
+        },
+        "hydra-server": {
+            "git": "https://github.com/hydraplatform/hydra-server.git",
+            "ref": "ae917f11735f44a001c9581b7402883c76f3c488"
+        },
+        "spyne": {
+            "git": "https://github.com/arskom/spyne.git",
+            "ref": "e36e7dd8e8317c998c1d06e159fa4af92e15cb58"
+        }
+    },
+    "develop": {}
+}

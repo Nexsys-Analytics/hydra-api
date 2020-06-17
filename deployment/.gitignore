@@ -1,0 +1,5 @@
+k8s/cli-temp-folder/*
+k8s/deployment/cli-config/current/*
+k8s/storage/cli-config/current/*
+k8s/route53/cli-config/current/*
+k8s/load-balancer/cli-config/current/*
