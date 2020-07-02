@@ -14,8 +14,11 @@ verify_ssl = true
 
 [packages]
 spyne = {git = "https://github.com/arskom/spyne.git", ref="spyne-2.13.2-alpha"}
-hydra-base = {git = "https://github.com/hydraplatform/hydra-base.git", ref = "master"}
-hydra-server = {git = "https://github.com/hydraplatform/hydra-server.git", ref = "master"}
+#hydra-base = {git = "https://github.com/hydraplatform/hydra-base.git", ref = "master"}
+#hydra-server = {git = "https://github.com/hydraplatform/hydra-server.git", ref = "master"}
+
+hydra-base = {git = "https://github.com/hydraplatform/hydra-base.git", ref = "105-integrate-unite-tests"}
+hydra-server = {git = "https://github.com/hydraplatform/hydra-server.git", ref = "105-integrate-unite-tests"}
 
 [requires]
 python_version = "3.6"

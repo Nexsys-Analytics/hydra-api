@@ -1,12 +1,12 @@
 {
   "service":{
-    "name": "hydra-server",
-    "description": "This service represents the Hydra Server API",
+    "name": "hydra-api",
+    "description": "This service represents the Hydra Server API of jobs.",
     "warning": "The order of the resources is important because the creation is done forward while deletion is done backward!",
     "resources":[
       {
         "properties":{
-          "name":"hsv-aws-config-map",
+          "name":"api-aws-config-map",
           "temp_folder":"aws-config-map",
           "remote_service": "s3",
           "remote_sub_folder":"/.aws",
@@ -17,15 +17,10 @@
         "files":[
           "config",
           "credentials"
-        ],
-        "mandatory_env_variables":[
-          "K8S_AWS_USER_ARN",
-          "K8S_AWS_ACCESS_KEY_ID",
-          "K8S_AWS_SECRET_ACCESS_KEY"
         ]
       }, {
         "properties":{
-          "name":"hsv-config-map",
+          "name":"api-config-map",
           "temp_folder":"config-map",
           "remote_service": "s3",
           "remote_sub_folder":"/.hydra",
@@ -39,23 +34,23 @@
         ]
       }, {
         "properties":{
-          "name":"hydra-server-deployment",
-          "folder":"deployment",
-          "type": "deployment",
+          "name":"hydra-api-statefulset",
+          "folder":"statefulset",
+          "type": "statefulset",
           "subtype": "n/a",
           "enabled": "true"
         },
         "files_execution_order": [
-          "hsv-deployment"
+          "api-statefulset"
         ],
         "containers": {
-          "hsv": {
-            "image_name": "hydra-server"
+          "api": {
+            "image_name": "hydra-api"
           }
         }
       }, {
         "properties":{
-          "name":"hydra-server-nodeport",
+          "name":"hydra-api-nodeport",
           "folder":"nodeport",
           "type": "load-balancer",
           "subtype": "n/a",
@@ -64,7 +59,7 @@
           "enabled": "true"
         },
         "files_execution_order": [
-          "hsv-service"
+          "api-service"
         ]
       }
     ]
