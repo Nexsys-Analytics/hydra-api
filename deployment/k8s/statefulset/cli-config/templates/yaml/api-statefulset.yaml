@@ -25,9 +25,9 @@ spec:
         imagePullPolicy: "${K8S_IMAGE_PULL_POLICY}"
         resources:
           limits:
-            memory: "256Mi"
+            memory: "512Mi"
           requests:
-            memory: "256Mi"
+            memory: "512Mi"
         env:
         - name: IS_RUNNING_ENVIRONMENT_K8S
           value: 'TRUE'
