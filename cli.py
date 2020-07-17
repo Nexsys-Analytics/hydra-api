@@ -18,8 +18,9 @@
 import sys
 import os
 import click
-from hydra_server import s
-import hydra_base as hb
+from hydra_server import initialize
+
+import hydra_pywr_common
 
 
 global DEFAULT_PORT
@@ -32,7 +33,8 @@ if DEFAULT_PORT is not None:
 @click.option('-p', '--port', default=DEFAULT_PORT, help='Hydra Server Port Number')
 def run(port):
 
-    s.run_server(port=port)
+    application, api_server = initialize(None)
+    api_server.run_server(port=port)
 
 #To kill this process, use this command:
 #ps -ef | grep 'server.py' | grep 'python' | awk '{print $2}' | xargs kill
