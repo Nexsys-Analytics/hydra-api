@@ -16,8 +16,6 @@ verify_ssl = true
 spyne = {git = "https://github.com/arskom/spyne.git", ref="spyne-2.13.2-alpha"}
 hydra-base = {git = "https://github.com/hydraplatform/hydra-base.git", ref = "master"}
 hydra-server = {git = "https://github.com/hydraplatform/hydra-server.git", ref = "master"}
-hydra-api = {git = "git@gitlab.hydra.org.uk/hydra/hydra-api.git", ref = "dev"}
-hydra-pywr-common = {git = "https://github.com/pywr/hydra-pywr-common.git", ref = "master"}
 
 [requires]
 python_version = "3.6"
