@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "d8a791719bc22839537828fc94d64448378e391e12cda400f46528baec1ba39a"
+            "sha256": "68f5496aaf7280f2f61c3434a70bba2f3a907cdbc154a9f7b07cd3d08e234007"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -16,13 +16,21 @@
         ]
     },
     "default": {
+        "hydra-api": {
+            "git": "git@gitlab.hydra.org.uk/hydra/hydra-api.git",
+            "ref": "21b9b851288973be98509761e21268776e2e9799"
+        },
         "hydra-base": {
             "git": "https://github.com/hydraplatform/hydra-base.git",
-            "ref": "7b69a2e3911793b0b8f39b78858be688b814122a"
+            "ref": "54d3cb7ee3cb1041d16bfea7f3c74a76686785fa"
+        },
+        "hydra-pywr-common": {
+            "git": "https://github.com/pywr/hydra-pywr-common.git",
+            "ref": "df438ac5de9cc333e607cd70c673079a364f602b"
         },
         "hydra-server": {
             "git": "https://github.com/hydraplatform/hydra-server.git",
-            "ref": "20d8990ee931696b3b1c5ece974d28136d0ab84a"
+            "ref": "a35e02d9228acd0508a86bb2054c6066cf21e7cf"
         },
         "spyne": {
             "git": "https://github.com/arskom/spyne.git",
