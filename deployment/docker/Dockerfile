@@ -25,7 +25,7 @@ RUN ./install.sh
 #RUN rm Pipfile
 #RUN rm Pipfile.lock
 
-CMD ["hydra-server", "run"]
+CMD ["hydra-api"]
 # Use the following command to hold the container for 3600 seconds instead of running the hydra-server command.
 # In this way it is therefore possible to inspect the container
 # CMD ["/bin/sleep", "3600"]
