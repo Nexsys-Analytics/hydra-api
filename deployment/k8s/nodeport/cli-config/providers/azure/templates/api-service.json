@@ -2,20 +2,20 @@
   "apiVersion": "v1",
   "kind": "Service",
   "metadata": {
-    "name": "api-svc-${HWI_ENV_K8S_CURRENT_DISTRIBUTION}"
+    "name": "api-svc-${CURRENT_WORKING_ENVIRONMENT}"
   },
   "spec": {
     "ports": [
       {
         "port": 80,
-        "targetPort": "api-${HWI_ENV_K8S_CURRENT_DISTRIBUTION}-srv",
+        "targetPort": "api-${CURRENT_WORKING_ENVIRONMENT}-srv",
         "protocol": "TCP",
         "name": "http"
       }
     ],
     "type": "NodePort",
     "selector": {
-      "app": "api-${HWI_ENV_K8S_CURRENT_DISTRIBUTION}"
+      "app": "api-${CURRENT_WORKING_ENVIRONMENT}"
     }
   }
 }
