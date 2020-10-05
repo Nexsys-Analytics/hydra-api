@@ -2,9 +2,9 @@
   "apiVersion": "apps/v1",
   "kind": "StatefulSet",
   "metadata": {
-    "name": "api-${HWI_ENV_K8S_CURRENT_DISTRIBUTION}-statefulset",
+    "name": "api-${CURRENT_WORKING_ENVIRONMENT}-statefulset",
     "labels": {
-      "app": "api-${HWI_ENV_K8S_CURRENT_DISTRIBUTION}"
+      "app": "api-${CURRENT_WORKING_ENVIRONMENT}"
     }
   },
   "spec": {
@@ -15,20 +15,20 @@
     },
     "selector": {
       "matchLabels": {
-        "app": "api-${HWI_ENV_K8S_CURRENT_DISTRIBUTION}"
+        "app": "api-${CURRENT_WORKING_ENVIRONMENT}"
       }
     },
     "template": {
       "metadata": {
         "labels": {
-          "app": "api-${HWI_ENV_K8S_CURRENT_DISTRIBUTION}"
+          "app": "api-${CURRENT_WORKING_ENVIRONMENT}"
         }
       },
       "spec": {
         "terminationGracePeriodSeconds": 30,
         "containers": [
           {
-            "name": "api-${HWI_ENV_K8S_CURRENT_DISTRIBUTION}",
+            "name": "api-${CURRENT_WORKING_ENVIRONMENT}",
             "image": "${K8S_DIST_IMAGE_SOURCE_PATH}:${K8S_DIST_IMAGE_TAG}",
             "imagePullPolicy": "Always",
             "resources": {
@@ -51,17 +51,17 @@
             ],
             "ports": [
               {
-                "name": "api-${HWI_ENV_K8S_CURRENT_DISTRIBUTION}-srv",
+                "name": "api-${CURRENT_WORKING_ENVIRONMENT}-srv",
                 "containerPort": 8080
               }
             ],
             "volumeMounts": [
               {
-                "name": "hydra-${HWI_ENV_K8S_CURRENT_DISTRIBUTION}-config-volume",
+                "name": "hydra-${CURRENT_WORKING_ENVIRONMENT}-config-volume",
                 "mountPath": "/root/.hydra"
               },
               {
-                "name": "hydra-${HWI_ENV_K8S_CURRENT_DISTRIBUTION}-aws-config-volume",
+                "name": "hydra-${CURRENT_WORKING_ENVIRONMENT}-aws-config-volume",
                 "mountPath": "/root/.aws"
               },
               {
@@ -73,15 +73,15 @@
         ],
         "volumes": [
           {
-            "name": "hydra-${HWI_ENV_K8S_CURRENT_DISTRIBUTION}-config-volume",
+            "name": "hydra-${CURRENT_WORKING_ENVIRONMENT}-config-volume",
             "configMap": {
-              "name": "hydra-${HWI_ENV_K8S_CURRENT_DISTRIBUTION}-api-config-map"
+              "name": "hydra-${CURRENT_WORKING_ENVIRONMENT}-api-config-map"
             }
           },
           {
-            "name": "hydra-${HWI_ENV_K8S_CURRENT_DISTRIBUTION}-aws-config-volume",
+            "name": "hydra-${CURRENT_WORKING_ENVIRONMENT}-aws-config-volume",
             "configMap": {
-              "name": "hydra-${HWI_ENV_K8S_CURRENT_DISTRIBUTION}-api-aws-config-map"
+              "name": "hydra-${CURRENT_WORKING_ENVIRONMENT}-api-aws-config-map"
             }
           },
           {
