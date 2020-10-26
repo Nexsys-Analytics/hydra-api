@@ -18,7 +18,7 @@
     "default": {
         "hydra-api": {
             "git": "git@gitlab.hydra.org.uk/hydra/hydra-api.git",
-            "ref": "21b9b851288973be98509761e21268776e2e9799"
+            "ref": "e8f7736f43e5d6ed24563bd0f68ef64f34191063"
         },
         "hydra-base": {
             "git": "https://github.com/hydraplatform/hydra-base.git",
