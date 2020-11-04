@@ -1,0 +1,6 @@
+packaging
+git+https://github.com/arskom/spyne.git@spyne-2.13.2-alpha
+git+https://github.com/hydraplatform/hydra-base.git@master
+git+https://github.com/hydraplatform/hydra-server.git@master
+git+https://gitlab+deploy-token-19:vUZf73-ALze_9y3ARNFa@gitlab.hydra.org.uk/hydra/hydra-api.git@${CURRENT_REPOSITORY_BRANCH}
+git+https://github.com/pywr/hydra-pywr-common.git@master
