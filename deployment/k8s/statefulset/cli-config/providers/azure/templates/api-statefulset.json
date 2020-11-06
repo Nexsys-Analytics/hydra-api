@@ -1,0 +1,97 @@
+{
+  "apiVersion": "apps/v1",
+  "kind": "StatefulSet",
+  "metadata": {
+    "name": "api-${CURRENT_WORKING_ENVIRONMENT}-statefulset",
+    "labels": {
+      "app": "api-${CURRENT_WORKING_ENVIRONMENT}"
+    }
+  },
+  "spec": {
+    "replicas": 1,
+    "serviceName": "hydra-api",
+    "updateStrategy": {
+      "type": "RollingUpdate"
+    },
+    "selector": {
+      "matchLabels": {
+        "app": "api-${CURRENT_WORKING_ENVIRONMENT}"
+      }
+    },
+    "template": {
+      "metadata": {
+        "labels": {
+          "app": "api-${CURRENT_WORKING_ENVIRONMENT}"
+        }
+      },
+      "spec": {
+        "terminationGracePeriodSeconds": 30,
+        "containers": [
+          {
+            "name": "api-${CURRENT_WORKING_ENVIRONMENT}",
+            "image": "${K8S_DIST_IMAGE_SOURCE_PATH}:${K8S_DIST_IMAGE_TAG}",
+            "imagePullPolicy": "Always",
+            "resources": {
+              "limits": {
+                "memory": "512Mi"
+              },
+              "requests": {
+                "memory": "512Mi"
+              }
+            },
+            "env": [
+              {
+                "name": "IS_RUNNING_ENVIRONMENT_K8S",
+                "value": "TRUE"
+              },
+              {
+                "name": "K8S_IMAGE_SIMPLE_NAME_SOURCE_API",
+                "value": "hydra-api"
+              }
+            ],
+            "ports": [
+              {
+                "name": "api-${CURRENT_WORKING_ENVIRONMENT}-srv",
+                "containerPort": 8080
+              }
+            ],
+            "volumeMounts": [
+              {
+                "name": "hydra-${CURRENT_WORKING_ENVIRONMENT}-config-volume",
+                "mountPath": "/root/.hydra"
+              },
+              {
+                "name": "hydra-${CURRENT_WORKING_ENVIRONMENT}-aws-config-volume",
+                "mountPath": "/root/.aws"
+              },
+              {
+                "name": "dockersock",
+                "mountPath": "/var/run/docker.sock"
+              }
+            ]
+          }
+        ],
+        "volumes": [
+          {
+            "name": "hydra-${CURRENT_WORKING_ENVIRONMENT}-config-volume",
+            "configMap": {
+              "name": "hydra-${CURRENT_WORKING_ENVIRONMENT}-api-config-map"
+            }
+          },
+          {
+            "name": "hydra-${CURRENT_WORKING_ENVIRONMENT}-aws-config-volume",
+            "configMap": {
+              "name": "hydra-${CURRENT_WORKING_ENVIRONMENT}-api-aws-config-map"
+            }
+          },
+          {
+            "name": "dockersock",
+            "hostPath": {
+              "path": "/var/run/docker.sock"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
