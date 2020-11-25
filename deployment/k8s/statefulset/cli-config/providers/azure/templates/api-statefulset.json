@@ -11,7 +11,10 @@
     "replicas": 1,
     "serviceName": "hydra-api",
     "updateStrategy": {
-      "type": "RollingUpdate"
+      "type": "RollingUpdate",
+      "rollingUpdate": {
+        "maxUnavailable":1
+      }
     },
     "selector": {
       "matchLabels": {
