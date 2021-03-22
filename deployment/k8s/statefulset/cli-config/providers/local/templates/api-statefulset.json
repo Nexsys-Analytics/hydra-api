@@ -97,7 +97,7 @@
         ],
         "imagePullSecrets": [
           {
-            "name": "eu-west-1-ecr-registry"
+            "name": "dafni-docker-registry"
           }
         ],
         "volumes": [
