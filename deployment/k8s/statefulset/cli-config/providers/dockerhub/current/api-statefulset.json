@@ -1,0 +1,122 @@
+{
+  "apiVersion": "apps/v1",
+  "kind": "StatefulSet",
+  "metadata": {
+    "name": "api-wre-statefulset",
+    "labels": {
+      "app": "api-wre"
+    }
+  },
+  "spec": {
+    "replicas": 1,
+    "serviceName": "hydra-api",
+    "updateStrategy": {
+      "type": "RollingUpdate"
+    },
+    "selector": {
+      "matchLabels": {
+        "app": "api-wre"
+      }
+    },
+    "template": {
+      "metadata": {
+        "labels": {
+          "app": "api-wre"
+        }
+      },
+      "spec": {
+        "terminationGracePeriodSeconds": 30,
+        "affinity": {
+          "podAffinity": {
+            "requiredDuringSchedulingIgnoredDuringExecution": [
+              {
+                "labelSelector": {
+                  "matchExpressions": [
+                    {
+                      "key": "app",
+                      "operator": "In",
+                      "values": [
+                        "hwi-wre"
+                      ]
+                    }
+                  ]
+                },
+                "topologyKey": "kubernetes.io/hostname"
+              }
+            ]
+          }
+        },
+        "containers": [
+          {
+            "name": "api-wre",
+            "image": "umwrg/hydra-api:wre",
+            "imagePullPolicy": "Always",
+            "resources": {
+              "limits": {
+                "memory": "512Mi"
+              },
+              "requests": {
+                "memory": "512Mi"
+              }
+            },
+            "env": [
+              {
+                "name": "IS_RUNNING_ENVIRONMENT_K8S",
+                "value": "TRUE"
+              },
+              {
+                "name": "K8S_IMAGE_SIMPLE_NAME_SOURCE_API",
+                "value": "hydra-api"
+              }
+            ],
+            "ports": [
+              {
+                "name": "api-wre-srv",
+                "containerPort": 8080
+              }
+            ],
+            "volumeMounts": [
+              {
+                "name": "hydra-wre-config-volume",
+                "mountPath": "/root/.hydra"
+              },
+              {
+                "name": "hydra-wre-aws-config-volume",
+                "mountPath": "/root/.aws"
+              },
+              {
+                "name": "dockersock",
+                "mountPath": "/var/run/docker.sock"
+              }
+            ]
+          }
+        ],
+        "imagePullSecrets": [
+          {
+            "name": "regcred"
+          }
+        ],
+        "volumes": [
+          {
+            "name": "hydra-wre-config-volume",
+            "configMap": {
+              "name": "hydra-wre-api-config-map"
+            }
+          },
+          {
+            "name": "hydra-wre-aws-config-volume",
+            "configMap": {
+              "name": "hydra-wre-api-aws-config-map"
+            }
+          },
+          {
+            "name": "dockersock",
+            "hostPath": {
+              "path": "/var/run/docker.sock"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
