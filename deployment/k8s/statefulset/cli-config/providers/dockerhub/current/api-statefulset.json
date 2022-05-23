@@ -2,26 +2,30 @@
   "apiVersion": "apps/v1",
   "kind": "StatefulSet",
   "metadata": {
-    "name": "api-wre-statefulset",
+    "name": "api-live-statefulset",
     "labels": {
-      "app": "api-wre"
+      "app": "api-live"
     }
   },
   "spec": {
     "replicas": 1,
     "serviceName": "hydra-api",
     "updateStrategy": {
-      "type": "RollingUpdate"
+      "type": "RollingUpdate",
+      "rollingUpdate": {
+        "maxUnavailable": 1,
+        "maxSurge": 1
+      }
     },
     "selector": {
       "matchLabels": {
-        "app": "api-wre"
+        "app": "api-live"
       }
     },
     "template": {
       "metadata": {
         "labels": {
-          "app": "api-wre"
+          "app": "api-live"
         }
       },
       "spec": {
@@ -36,7 +40,7 @@
                       "key": "app",
                       "operator": "In",
                       "values": [
-                        "hwi-wre"
+                        "hwi-live"
                       ]
                     }
                   ]
@@ -48,8 +52,8 @@
         },
         "containers": [
           {
-            "name": "api-wre",
-            "image": "umwrg/hydra-api:wre",
+            "name": "api-live",
+            "image": ":",
             "imagePullPolicy": "Always",
             "resources": {
               "limits": {
@@ -71,17 +75,17 @@
             ],
             "ports": [
               {
-                "name": "api-wre-srv",
+                "name": "api-live-srv",
                 "containerPort": 8080
               }
             ],
             "volumeMounts": [
               {
-                "name": "hydra-wre-config-volume",
+                "name": "hydra-live-config-volume",
                 "mountPath": "/root/.hydra"
               },
               {
-                "name": "hydra-wre-aws-config-volume",
+                "name": "hydra-live-aws-config-volume",
                 "mountPath": "/root/.aws"
               },
               {
@@ -98,15 +102,15 @@
         ],
         "volumes": [
           {
-            "name": "hydra-wre-config-volume",
+            "name": "hydra-live-config-volume",
             "configMap": {
-              "name": "hydra-wre-api-config-map"
+              "name": "hydra-live-api-config-map"
             }
           },
           {
-            "name": "hydra-wre-aws-config-volume",
+            "name": "hydra-live-aws-config-volume",
             "configMap": {
-              "name": "hydra-wre-api-aws-config-map"
+              "name": "hydra-live-api-aws-config-map"
             }
           },
           {
