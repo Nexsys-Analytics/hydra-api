@@ -20,7 +20,7 @@ import os
 import click
 from hydra_server import initialize
 
-import hydra_pywr
+import hydra_pywr_common
 
 
 global DEFAULT_PORT
