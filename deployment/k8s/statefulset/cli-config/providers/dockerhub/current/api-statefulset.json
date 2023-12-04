@@ -48,8 +48,8 @@
         },
         "containers": [
           {
-            "name": "api-live",
-            "image": "umwrg/hydra-api:live",
+            "name": "api-test",
+            "image": "umwrg/hydra-api:test",
             "imagePullPolicy": "Always",
             "resources": {
               "limits": {
