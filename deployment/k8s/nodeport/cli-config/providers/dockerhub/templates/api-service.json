@@ -10,7 +10,8 @@
         "port": 80,
         "targetPort": "api-${CURRENT_WORKING_ENVIRONMENT}-srv",
         "protocol": "TCP",
-        "name": "http"
+        "name": "http",
+        "nodePort": ${spec_ports_nodePort}
       }
     ],
     "type": "NodePort",
