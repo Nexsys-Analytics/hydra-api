@@ -14,7 +14,7 @@
         "nodePort": ${spec_ports_nodePort}
       }
     ],
-    "type": "NodePort",
+    "type": ${spec_type},
     "selector": {
       "app": "api-${CURRENT_WORKING_ENVIRONMENT}"
     }
