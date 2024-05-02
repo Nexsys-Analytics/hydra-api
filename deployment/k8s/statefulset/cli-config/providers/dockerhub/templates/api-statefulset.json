@@ -57,10 +57,10 @@
             "imagePullPolicy": "Always",
             "resources": {
               "limits": {
-                "memory": "512Mi"
+                "memory": "${spec_template_spec_containers_resources_limits_memory}"
               },
               "requests": {
-                "memory": "512Mi"
+                "memory": "${spec_template_spec_containers_resources_requests_memory}"
               }
             },
             "env": [
