@@ -8,8 +8,8 @@
 ####################################################################################à
 
 packaging
-git+https://github.com/arskom/spyne.git@spyne-2.13.2-alpha
+spyne==2.14.0
 git+https://github.com/hydraplatform/hydra-base.git@${HYDRA_BASE_BRANCH_FOR_DIST}
 git+https://github.com/hydraplatform/hydra-server.git@${HYDRA_SERVER_BRANCH_FOR_DIST}
-git+https://gitlab+deploy-token-306:r9vp9r4uWDHXeFwHUDSE@gitlab.hydra.org.uk/hydra/hydra-api.git@${CURRENT_REPOSITORY_BRANCH}
-git+https://github.com/pywr/hydra-pywr-common.git@${HYDRA_PYWR_COMMON_BRANCH_FOR_DIST}
+git+https://github.com/nexsys-analytics/hydra-api.git@${CURRENT_REPOSITORY_BRANCH}
+git+https://github.com/umwrg/pywrparser.git@master

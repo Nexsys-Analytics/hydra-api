@@ -15,8 +15,7 @@
 ####################################################################################à
 
 packaging
-git+https://github.com/arskom/spyne.git@spyne-2.13.2-alpha
+spyne==2.14.0
 git+https://github.com/hydraplatform/hydra-base.git@master
 git+https://github.com/hydraplatform/hydra-server.git@master
-git+https://gitlab+deploy-token-328:rVP71sTWZMWU17WZS-ks@gitlab.hydra.org.uk/hydra/hydra-api.git@dev
-git+https://github.com/pywr/hydra-pywr-common.git@pywr-direct-global-parameters
+git+https://github.com/nexsys-analytics/hydra-api.git@master
