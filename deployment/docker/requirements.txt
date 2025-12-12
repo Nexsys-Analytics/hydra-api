@@ -17,5 +17,9 @@
 packaging
 spyne==2.14.0
 git+https://github.com/hydraplatform/hydra-base.git@master
+git+https://github.com/hydraplatform/hydra-network-utils.git@master
+git+https://github.com/hydraplatform/hydra-client-python.git@master
 git+https://github.com/hydraplatform/hydra-server.git@master
 git+https://github.com/nexsys-analytics/hydra-api.git@master
+git+https://github.com/umwrg/pywrparser.git@master
+git+https://github.com/pywr/hydra-pywr.git@master
